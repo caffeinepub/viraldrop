@@ -19,6 +19,7 @@ import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import ProductsSection from "./components/ProductsSection";
 import { useActor } from "./hooks/useActor";
+import { InternetIdentityProvider } from "./hooks/useInternetIdentity";
 import {
   useAddToCart,
   useCart,
@@ -147,7 +148,7 @@ function StoreFront() {
 
 function RootLayout() {
   return (
-    <>
+    <InternetIdentityProvider>
       <Outlet />
       <Toaster
         position="bottom-right"
@@ -159,7 +160,7 @@ function RootLayout() {
           },
         }}
       />
-    </>
+    </InternetIdentityProvider>
   );
 }
 
