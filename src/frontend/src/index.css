@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    /* Dark neon ViralDrop palette */
+    --background: 0.1 0.005 230;
+    --foreground: 0.96 0.005 230;
+    --card: 0.17 0.01 230;
+    --card-foreground: 0.96 0.005 230;
+    --popover: 0.17 0.01 230;
+    --popover-foreground: 0.96 0.005 230;
+    --primary: 0.79 0.14 189;
+    --primary-foreground: 0.1 0.005 230;
+    --secondary: 0.22 0.015 230;
+    --secondary-foreground: 0.96 0.005 230;
+    --muted: 0.22 0.015 230;
+    --muted-foreground: 0.72 0.01 230;
+    --accent: 0.65 0.28 320;
+    --accent-foreground: 0.96 0.005 230;
+    --destructive: 0.65 0.28 320;
+    --destructive-foreground: 0.96 0.005 230;
+    --border: 0.26 0.015 230;
+    --input: 0.16 0.01 230;
+    --ring: 0.79 0.14 189;
+    --chart-1: 0.79 0.14 189;
+    --chart-2: 0.65 0.28 320;
+    --chart-3: 0.52 0.27 285;
+    --chart-4: 0.83 0.17 90;
+    --chart-5: 0.6 0.2 230;
+    --sidebar: 0.12 0.005 230;
+    --sidebar-foreground: 0.96 0.005 230;
+    --sidebar-primary: 0.79 0.14 189;
+    --sidebar-primary-foreground: 0.1 0.005 230;
+    --sidebar-accent: 0.22 0.015 230;
+    --sidebar-accent-foreground: 0.96 0.005 230;
+    --sidebar-border: 0.26 0.015 230;
+    --sidebar-ring: 0.79 0.14 189;
+    /* Custom tokens */
+    --teal: 0.79 0.14 189;
+    --magenta: 0.65 0.28 320;
+    --purple: 0.52 0.27 285;
+    --star: 0.83 0.17 90;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    background: radial-gradient(
+      ellipse at top,
+      oklch(0.13 0.015 230) 0%,
+      oklch(0.1 0.005 230) 70%
+    );
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.12 0.005 230);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.26 0.015 230);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .text-teal {
+    color: oklch(var(--teal));
+  }
+  .text-magenta {
+    color: oklch(var(--magenta));
+  }
+  .text-purple {
+    color: oklch(var(--purple));
+  }
+  .text-star {
+    color: oklch(var(--star));
+  }
+  .bg-teal {
+    background-color: oklch(var(--teal));
+  }
+  .bg-magenta {
+    background-color: oklch(var(--magenta));
+  }
+  .bg-purple {
+    background-color: oklch(var(--purple));
+  }
+  .border-teal {
+    border-color: oklch(var(--teal));
+  }
+  .border-magenta {
+    border-color: oklch(var(--magenta));
+  }
+  .glow-teal {
+    box-shadow: 0 0 20px oklch(0.79 0.14 189 / 0.4);
+  }
+  .glow-magenta {
+    box-shadow: 0 0 20px oklch(0.65 0.28 320 / 0.4);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px oklch(0.52 0.27 285 / 0.4);
+  }
+  .gradient-teal-magenta {
+    background: linear-gradient(
+      135deg,
+      oklch(0.79 0.14 189),
+      oklch(0.65 0.28 320)
+    );
+  }
+  .gradient-magenta-purple {
+    background: linear-gradient(
+      135deg,
+      oklch(0.65 0.28 320),
+      oklch(0.52 0.27 285)
+    );
+  }
+  .font-display {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+  .font-body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}
