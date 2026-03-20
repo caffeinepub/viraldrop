@@ -1,5 +1,13 @@
 import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Outlet,
+  RouterProvider,
+  createBrowserHistory,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import type { ProductCategory } from "./backend.d";
@@ -18,12 +26,13 @@ import {
   useProducts,
   useSeedData,
 } from "./hooks/useQueries";
+import AdminPage from "./pages/AdminPage";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
 });
 
-function AppInner() {
+function StoreFront() {
   const [cartOpen, setCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
@@ -39,7 +48,6 @@ function AppInner() {
   const addToCart = useAddToCart();
   const [addingId, setAddingId] = useState<bigint | null>(null);
 
-  // Seed data on first load
   // biome-ignore lint/correctness/useExhaustiveDependencies: seedData.mutate is stable
   useEffect(() => {
     if (actor && !isFetching && !seeded.current) {
@@ -137,10 +145,46 @@ function AppInner() {
   );
 }
 
+function RootLayout() {
+  return (
+    <>
+      <Outlet />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: "oklch(0.17 0.01 230)",
+            border: "1px solid oklch(0.26 0.015 230)",
+            color: "oklch(0.96 0.005 230)",
+          },
+        }}
+      />
+    </>
+  );
+}
+
+const rootRoute = createRootRoute({ component: RootLayout });
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/",
+  component: StoreFront,
+});
+const adminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/admin",
+  component: AdminPage,
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, adminRoute]);
+const router = createRouter({
+  routeTree,
+  history: createBrowserHistory(),
+});
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppInner />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

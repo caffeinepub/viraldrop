@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Search, ShoppingCart, User } from "lucide-react";
+import { Search, Settings, ShoppingCart, User } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 
@@ -101,6 +101,17 @@ export default function Header({
               <User className="h-4 w-4" />
               <span className="hidden sm:inline">Account</span>
             </Button>
+
+            <a
+              href="/admin"
+              className="flex items-center gap-1.5 px-2 py-1 rounded text-xs font-medium transition-colors hover:bg-white/5"
+              style={{ color: "oklch(0.55 0.01 230)" }}
+              data-ocid="nav.admin.link"
+              title="Admin Panel"
+            >
+              <Settings className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Admin</span>
+            </a>
 
             <Button
               variant="ghost"
